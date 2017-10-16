@@ -16,6 +16,8 @@ import javafx.stage.Stage;
  *
  */
 public class Main extends Application {
+	
+	protected String stylesheet = "./resources/stylesheet.css";
 
 	/**
 	 * Launches the application.
@@ -38,9 +40,9 @@ public class Main extends Application {
 		 * inputs their log in information.
 		 */
 		primaryStage.setScene(new Scene(new IntroView()));
+		primaryStage.getScene().getStylesheets().add(stylesheet);
 		//show() must be called to display the Stage to User.
 		primaryStage.show();
-		
 		//changes the focus of the intro screen so that no textfields are automatically
 		//selected (user must click on Username box)
 		Platform.runLater( () -> {

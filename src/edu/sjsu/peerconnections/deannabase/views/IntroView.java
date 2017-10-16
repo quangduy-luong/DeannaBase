@@ -113,6 +113,7 @@ public class IntroView extends Pane {
 		passwordTextField.setPromptText("Password");
 		loginButton = new Button("Log In");
 		loginButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		loginButton.setId("btn-1");
 		
 		//To add a node to the GridPane, use one of pane's add() methods:
 		//In this case, we use add(Node child, column, row, columnspan, rowspan)
