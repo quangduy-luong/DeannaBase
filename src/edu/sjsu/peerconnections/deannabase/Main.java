@@ -2,6 +2,7 @@ package edu.sjsu.peerconnections.deannabase;
 
 import edu.sjsu.peerconnections.deannabase.views.IntroView;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -39,5 +40,11 @@ public class Main extends Application {
 		primaryStage.setScene(new Scene(new IntroView()));
 		//show() must be called to display the Stage to User.
 		primaryStage.show();
+		
+		//changes the focus of the intro screen so that no textfields are automatically
+		//selected (user must click on Username box)
+		Platform.runLater( () -> {
+			((IntroView)primaryStage.getScene().getRoot()).initFocus();
+		});
 	}
 }

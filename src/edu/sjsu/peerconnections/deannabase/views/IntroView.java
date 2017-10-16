@@ -1,14 +1,16 @@
 package edu.sjsu.peerconnections.deannabase.views;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 
 /**
  * IntroView (View of MVC) is a Pane displayed in the initial window/Stage
@@ -55,7 +57,7 @@ public class IntroView extends Pane {
 		GridPane pane = new GridPane();
 		//Set to true for debugging; setGridLinesVisible is default false.
 		//Remove line for finished product.
-		pane.setGridLinesVisible(true);
+//		pane.setGridLinesVisible(true);
 		
 		int rows = 12;
 		int columns = 5;
@@ -98,33 +100,49 @@ public class IntroView extends Pane {
 		//initialize instance variables
 		logoLabel = new Label("Logo");
 		forgotPasswordLabel = new Label("Forgot password?");
+		//forgotPasswordLabel is currently not clickable
 		usernameTextField = new TextField();
+		//Setting preferred size to a high value allows it to fill the entire cell
+		usernameTextField.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		//setPromptText() displays the string parameter inside the text field
 		//until User clicks inside the field.
 		usernameTextField.setPromptText("Username");
 		//PasswordField is a TextField that censors user input.
 		passwordTextField = new PasswordField();
+		passwordTextField.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		passwordTextField.setPromptText("Password");
 		loginButton = new Button("Log In");
-		//Setting preferred width to a high value allows it to span the entire
-		//width of the column, matching username and password text field lengths.
-		loginButton.setPrefWidth(Double.MAX_VALUE);
+		loginButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		
 		//To add a node to the GridPane, use one of pane's add() methods:
 		//In this case, we use add(Node child, column, row, columnspan, rowspan)
 		//The two spans define how many columns or rows the child fills.
 		pane.add(usernameTextField, 1, 5, 3, 1);
 		pane.add(passwordTextField, 1, 6, 3, 1);
-		
 		pane.add(loginButton, 1, 8, 3, 1);
-		//forgotPasswordLabel is currently not centered or clickable
-		//center with CSS later?
-		pane.add(forgotPasswordLabel, 2, 9, 3, 1);
+		pane.add(logoLabel, 1, 1);
+		//To center forgotPasswordLabel requires an additional wrapper to set alignment
+		//use HBox to wrap forgotPasswordLabel
+		HBox forgotPasswordLabelWrapper = new HBox();
+		forgotPasswordLabelWrapper.getChildren().add(forgotPasswordLabel);
+		//set alignment of forgotPasswordLabelWrapper to centered, then add to pane
+		forgotPasswordLabelWrapper.setAlignment(Pos.CENTER);
+		pane.add(forgotPasswordLabelWrapper, 2, 9, 1, 1);
 		//getChildren() gets a list of the objects this pane contains (visually)
 		//Because the GridPane object pane contains all our desired nodes, we add
 		//only pane to the children.
 		this.getChildren().add(pane);
-
+		
+	}
+	
+	/**
+	 * Changes the focus so that no textfields are automatically selected on first display.
+	 * 
+	 * This method will be called by Main, as requestFocus() will not change focus unless
+	 * Stage is already visible.
+	 */
+	public void initFocus() {
+		logoLabel.requestFocus();
 	}
 
 }
