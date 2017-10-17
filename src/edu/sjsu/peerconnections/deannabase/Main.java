@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  * Stages, Scenes, Panes, etc. should be reachable through the initial window
  * that Main launches.
  * 
- * @author David Luong
+ * @author David Luong, Yvonne Hoang, Carl Shefcik, Hung Tang
  * @version 1.0
  *
  */
@@ -39,14 +39,18 @@ public class Main extends Application {
 		 * in this case, IntroView class is a Pane through which User sees and
 		 * inputs their log in information.
 		 */
-		primaryStage.setScene(new Scene(new IntroView()));
+		IntroView introView = new IntroView();
+		Scene scene = new Scene(introView);
+		introView.setScene(scene);
 		/*
 		 * To add CSS to style the scenes:
 		 * getStylesheets() gets the list of stylesheets, and add() adds a particular
 		 * (named) stylesheet to the list
 		 */
-		primaryStage.getScene().getStylesheets().add(stylesheet);
+		scene.getStylesheets().add(stylesheet);
 		//show() must be called to display the Stage to User.
+		primaryStage.setScene(scene);
+		primaryStage.setResizable(false);
 		primaryStage.show();
 		//changes the focus of the intro screen so that no textfields are automatically
 		//selected (user must click on Username box)

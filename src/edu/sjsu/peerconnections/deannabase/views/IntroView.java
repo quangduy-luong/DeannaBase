@@ -1,11 +1,15 @@
 package edu.sjsu.peerconnections.deannabase.views;
 
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -17,7 +21,7 @@ import javafx.scene.layout.RowConstraints;
  * where User inputs their log in information, such as username and password.
  * They may also request another password through the "Forget Password?" link.
  * 
- * @author David Luong
+ * @author David Luong, Yvonne Hoang, Carl Shefcik, Hung Tang
  * @version 1.0
  */
 public class IntroView extends Pane {
@@ -25,12 +29,13 @@ public class IntroView extends Pane {
 	//instance variables
 	private final int WIDTH = 800;
 	private final int HEIGHT = 480;
+	private Scene scene;
 	/*
 	 * Labels can contain text or images. In this case, logoLabel will contain an
 	 * image of the Peer Connections logo, and forgotPasswordLabel will contain
 	 * text reading "Forgot Password?"
 	 */
-	private Label logoLabel, forgotPasswordLabel;
+	private Labeled logoLabel, forgotPasswordLabel;
 	/*
 	 * TextFields are where User will input information. usernameTextField is for
 	 * username, and passwordTextField is for their password. passwordTextField is
@@ -44,7 +49,7 @@ public class IntroView extends Pane {
 	 * or Staff. On unsuccessful log in, an error message will be displayed for
 	 * wrong username/password.
 	 */
-	private Button loginButton;
+	private Labeled loginButton;
 
 	/**
 	 * This constructor initializes logoLabel, forgotPasswordLabel, usernameTextField,
@@ -98,8 +103,9 @@ public class IntroView extends Pane {
 		pane.setPrefSize(WIDTH, HEIGHT);
 		
 		//initialize instance variables
-		logoLabel = new Label("Logo");
-		forgotPasswordLabel = new Label("Forgot password?");
+		Image logo = new Image("./resources/logo.png");
+		logoLabel = new Label("", new ImageView(logo));
+		forgotPasswordLabel = new Hyperlink("Forgot password?");
 		//forgotPasswordLabel is currently not clickable
 		usernameTextField = new TextField();
 		//Setting preferred size to a high value allows it to fill the entire cell
@@ -122,7 +128,7 @@ public class IntroView extends Pane {
 		pane.add(usernameTextField, 1, 5, 3, 1);
 		pane.add(passwordTextField, 1, 6, 3, 1);
 		pane.add(loginButton, 1, 8, 3, 1);
-		pane.add(logoLabel, 1, 1);
+		pane.add(logoLabel, 1, 1, 3, 3);
 		//To center forgotPasswordLabel requires an additional wrapper to set alignment
 		//use HBox to wrap forgotPasswordLabel
 		HBox forgotPasswordLabelWrapper = new HBox();
@@ -145,6 +151,10 @@ public class IntroView extends Pane {
 	 */
 	public void initFocus() {
 		logoLabel.requestFocus();
+	}
+	
+	public void setScene(Scene scene) {
+		this.scene = scene;
 	}
 
 }
