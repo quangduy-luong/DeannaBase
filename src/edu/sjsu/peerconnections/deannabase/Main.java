@@ -40,6 +40,11 @@ public class Main extends Application {
 		 * inputs their log in information.
 		 */
 		primaryStage.setScene(new Scene(new IntroView()));
+		/*
+		 * To add CSS to style the scenes:
+		 * getStylesheets() gets the list of stylesheets, and add() adds a particular
+		 * (named) stylesheet to the list
+		 */
 		primaryStage.getScene().getStylesheets().add(stylesheet);
 		//show() must be called to display the Stage to User.
 		primaryStage.show();
