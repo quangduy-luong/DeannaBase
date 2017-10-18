@@ -16,6 +16,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 	
+	//instance variables
 	public static String stylesheetPath = "./resources/stylesheet.css";
 	public static String title = "Peer Connections Database";
 	public static String iconPath = "./resources/icon.png";
@@ -29,11 +30,13 @@ public class Main extends Application {
 	}
 
 	/**
-	 * Start the application by setting up the login view
+	 * Start the application by setting up the login view.
 	 */
 	@Override
 	public void start(Stage primaryStage) {
+		//creates a new View object via factory method (newView())
 		View introView = View.newView(new IntroView());
+		//disables User's ability to resize window of login screen
 		introView.getStage().setResizable(false);
 	}
 }

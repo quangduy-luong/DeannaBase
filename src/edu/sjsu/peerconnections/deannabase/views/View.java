@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 /**
- * Abstract class representing all views in the program
+ * View is an abstract Pane that represents all views in the program.
  * 
  * @author David Luong, Yvonne Hoang, Carl Shefcik, Hung Tang
  * @version 1.0
@@ -19,7 +19,7 @@ public abstract class View extends Pane {
 	private Stage stage;
 	
 	/**
-	 * Stage setter
+	 * Sets the Stage.
 	 * @param stage
 	 */
 	public void setStage(Stage stage) {
@@ -27,7 +27,7 @@ public abstract class View extends Pane {
 	}
 	
 	/**
-	 * Stage getter
+	 * Gets the Stage.
 	 * @return stage
 	 */
 	public Stage getStage() {
@@ -35,16 +35,16 @@ public abstract class View extends Pane {
 	}
 	
 	/**
-	 * Stylesheet setter - adds a stylesheet to the scene
-	 * Does NOT remove old stylesheets
-	 * @param path
+	 * Sets and adds a stylesheet to the scene.
+	 * Does NOT remove old stylesheets.
+	 * @param path file path to the stylesheet
 	 */
 	public void setStylesheet(String path) {
 		stage.getScene().getStylesheets().add(path);
 	}
 	
 	/**
-	 * Title setter for the stage
+	 * Sets the title for the stage.
 	 * @param title
 	 */
 	public void setTitle(String title) {
@@ -52,16 +52,17 @@ public abstract class View extends Pane {
 	}
 	
 	/**
-	 * Icon setter for the stage
-	 * @param path
+	 * Sets the icon for the stage.
+	 * @param path file path to the icon
 	 */
 	public void setIcon(String path) {
 		stage.getIcons().add(new Image(Main.iconPath));
 	}
 	
 	/**
-	 * Requests focus for a specified Node
-	 * @param n
+	 * Requests focus for a specified Node.
+	 * If not set, Textfields are autofocused.
+	 * @param n Node to be focused
 	 */
 	public void initFocus(Node n) {
 		n.requestFocus();
@@ -76,7 +77,7 @@ public abstract class View extends Pane {
 	
 	/**
 	 * Creates a specified View
-	 * Adds default stylesheet, title, icon to the stage
+	 * Adds default stylesheet, title, and icon to the Stage.
 	 * @param view
 	 * @return created view
 	 */
