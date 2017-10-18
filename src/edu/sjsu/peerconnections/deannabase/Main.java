@@ -18,7 +18,9 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 	
-	protected String stylesheet = "./resources/stylesheet.css";
+	protected String stylesheetPath = "./resources/stylesheet.css";
+	protected String title = "Peer Connections Database";
+	protected String iconPath = "./resources/icon.png";
 
 	/**
 	 * Launches the application.
@@ -48,12 +50,12 @@ public class Main extends Application {
 		 * getStylesheets() gets the list of stylesheets, and add() adds a particular
 		 * (named) stylesheet to the list
 		 */
-		scene.getStylesheets().add(stylesheet);
+		scene.getStylesheets().add(stylesheetPath);
 		//show() must be called to display the Stage to User.
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
-		primaryStage.setTitle("Peer Connections Database");
-		primaryStage.getIcons().add(new Image("./resources/icon.png"));
+		primaryStage.setTitle(title);
+		primaryStage.getIcons().add(new Image(iconPath));
 		primaryStage.show();
 		//changes the focus of the intro screen so that no textfields are automatically
 		//selected (user must click on Username box)
