@@ -4,6 +4,7 @@ import edu.sjsu.peerconnections.deannabase.views.IntroView;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -51,6 +52,8 @@ public class Main extends Application {
 		//show() must be called to display the Stage to User.
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
+		primaryStage.setTitle("Peer Connections Database");
+		primaryStage.getIcons().add(new Image("./resources/icon.png"));
 		primaryStage.show();
 		//changes the focus of the intro screen so that no textfields are automatically
 		//selected (user must click on Username box)
