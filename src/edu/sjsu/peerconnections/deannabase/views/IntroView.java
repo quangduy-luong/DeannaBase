@@ -16,8 +16,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.RowConstraints;
 
 /**
- * IntroView (View of MVC) is a Pane displayed in the initial window/Stage
- * where User inputs their log in information, such as username and password.
+ * IntroView is a View displayed in the initial window/Stage where
+ * User inputs their log in information, such as username and password.
  * They may also request another password through the "Forget Password?" link.
  * 
  * @author David Luong, Yvonne Hoang, Carl Shefcik, Hung Tang
@@ -60,7 +60,7 @@ public class IntroView extends View {
 		GridPane pane = new GridPane();
 		//Set to true for debugging; setGridLinesVisible is default false.
 		//Remove line for finished product.
-		//		pane.setGridLinesVisible(true);
+		//pane.setGridLinesVisible(true);
 
 		int rows = 12;
 		int columns = 5;
@@ -101,8 +101,14 @@ public class IntroView extends View {
 		pane.setPrefSize(WIDTH, HEIGHT);
 
 		//initialize instance variables
+		/*
+		 * Image objects require file paths. To wrap in a Label object,
+		 * the Image needs to be wrapped in an ImageView object as the Graphic
+		 * of the Label.
+		 */
 		Image logo = new Image("./resources/logo.png");
 		logoLabel = new Label("", new ImageView(logo));
+		//Hyperlink is a Label that makes the text clickable.
 		forgotPasswordLabel = new Hyperlink("Forgot password?");
 		//forgotPasswordLabel is currently not clickable
 		usernameTextField = new TextField();
