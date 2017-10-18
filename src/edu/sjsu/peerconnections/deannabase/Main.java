@@ -51,11 +51,12 @@ public class Main extends Application {
 		 * (named) stylesheet to the list
 		 */
 		scene.getStylesheets().add(stylesheetPath);
-		//show() must be called to display the Stage to User.
+		//setting up the stage so it can be shown
 		primaryStage.setScene(scene);
 		primaryStage.setResizable(false);
 		primaryStage.setTitle(title);
 		primaryStage.getIcons().add(new Image(iconPath));
+		//show() must be called to display the Stage to User.
 		primaryStage.show();
 		//changes the focus of the intro screen so that no textfields are automatically
 		//selected (user must click on Username box)

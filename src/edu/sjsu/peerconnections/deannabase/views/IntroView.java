@@ -153,6 +153,10 @@ public class IntroView extends Pane {
 		logoLabel.requestFocus();
 	}
 	
+	/**
+	 * Scene setter to set the scene for the view, in case we need it later
+	 * @param scene
+	 */
 	public void setScene(Scene scene) {
 		this.scene = scene;
 	}
