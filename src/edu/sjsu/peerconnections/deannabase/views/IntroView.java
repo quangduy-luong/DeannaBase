@@ -1,7 +1,7 @@
 package edu.sjsu.peerconnections.deannabase.views;
 
+import javafx.application.Platform;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -13,7 +13,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.RowConstraints;
 
 /**
@@ -24,12 +23,11 @@ import javafx.scene.layout.RowConstraints;
  * @author David Luong, Yvonne Hoang, Carl Shefcik, Hung Tang
  * @version 1.0
  */
-public class IntroView extends Pane {
+public class IntroView extends View {
 
 	//instance variables
 	private final int WIDTH = 800;
 	private final int HEIGHT = 480;
-	private Scene scene;
 	/*
 	 * Labels can contain text or images. In this case, logoLabel will contain an
 	 * image of the Peer Connections logo, and forgotPasswordLabel will contain
@@ -49,7 +47,7 @@ public class IntroView extends Pane {
 	 * or Staff. On unsuccessful log in, an error message will be displayed for
 	 * wrong username/password.
 	 */
-	private Labeled loginButton;
+	private Button loginButton;
 
 	/**
 	 * This constructor initializes logoLabel, forgotPasswordLabel, usernameTextField,
@@ -62,8 +60,8 @@ public class IntroView extends Pane {
 		GridPane pane = new GridPane();
 		//Set to true for debugging; setGridLinesVisible is default false.
 		//Remove line for finished product.
-//		pane.setGridLinesVisible(true);
-		
+		//		pane.setGridLinesVisible(true);
+
 		int rows = 12;
 		int columns = 5;
 		/*
@@ -101,7 +99,7 @@ public class IntroView extends Pane {
 		 * preferred size, defined previously as instance variables.
 		 */
 		pane.setPrefSize(WIDTH, HEIGHT);
-		
+
 		//initialize instance variables
 		Image logo = new Image("./resources/logo.png");
 		logoLabel = new Label("", new ImageView(logo));
@@ -121,7 +119,10 @@ public class IntroView extends Pane {
 		loginButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		//setId() is used to name the object for CSS purposes
 		loginButton.setId("btn-1");
-		
+		loginButton.setOnAction( e -> {
+			newView(new IntroView());
+			closeView();
+		});
 		//To add a node to the GridPane, use one of pane's add() methods:
 		//In this case, we use add(Node child, column, row, columnspan, rowspan)
 		//The two spans define how many columns or rows the child fills.
@@ -140,9 +141,13 @@ public class IntroView extends Pane {
 		//Because the GridPane object pane contains all our desired nodes, we add
 		//only pane to the children.
 		this.getChildren().add(pane);
-		
+		//changes the focus of the intro screen so that no textfields are automatically
+		//selected (user must click on Username box)
+		Platform.runLater( () -> {
+			((IntroView)getStage().getScene().getRoot()).initFocus();
+		});
 	}
-	
+
 	/**
 	 * Changes the focus so that no textfields are automatically selected on first display.
 	 * 
@@ -150,15 +155,7 @@ public class IntroView extends Pane {
 	 * Stage is already visible.
 	 */
 	public void initFocus() {
-		logoLabel.requestFocus();
-	}
-	
-	/**
-	 * Scene setter to set the scene for the view, in case we need it later
-	 * @param scene
-	 */
-	public void setScene(Scene scene) {
-		this.scene = scene;
+		initFocus(logoLabel);
 	}
 
 }
