@@ -126,7 +126,7 @@ public class IntroView extends View {
 		//setId() is used to name the object for CSS purposes
 		loginButton.setId("btn-1");
 		loginButton.setOnAction( e -> {
-			newView(new IntroView());
+			newView(new MenuView());
 			closeView();
 		});
 		//To add a node to the GridPane, use one of pane's add() methods:
