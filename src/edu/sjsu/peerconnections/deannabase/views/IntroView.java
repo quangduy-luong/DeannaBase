@@ -1,5 +1,6 @@
 package edu.sjsu.peerconnections.deannabase.views;
 
+import edu.sjsu.peerconnections.deannabase.Main;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -106,7 +107,7 @@ public class IntroView extends View {
 		 * the Image needs to be wrapped in an ImageView object as the Graphic
 		 * of the Label.
 		 */
-		Image logo = new Image("./resources/logo.png");
+		Image logo = new Image(Main.logoPath);
 		logoLabel = new Label("", new ImageView(logo));
 		//Hyperlink is a Label that makes the text clickable.
 		forgotPasswordLabel = new Hyperlink("Forgot password?");
