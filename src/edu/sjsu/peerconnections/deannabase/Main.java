@@ -20,6 +20,7 @@ public class Main extends Application {
 	public static String stylesheetPath = "./resources/stylesheet.css";
 	public static String title = "Peer Connections Database";
 	public static String iconPath = "./resources/icon.png";
+	public static String logoPath = "./resources/logo.png";
 
 	/**
 	 * Launches the application.

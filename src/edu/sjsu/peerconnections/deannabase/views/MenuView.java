@@ -1,6 +1,6 @@
 package edu.sjsu.peerconnections.deannabase.views;
 
-import javafx.scene.control.Button;
+import edu.sjsu.peerconnections.deannabase.Main;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.image.Image;
@@ -8,6 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
 /**
  * MenuView is a view of the main menu that is shown right after the user logs in
@@ -20,6 +21,7 @@ public class MenuView extends View {
 	private Labeled logoLabel;
 	private final int WIDTH = 800;
 	private final int HEIGHT = 480;
+	private final int BUTTON_SPACING = 15;
 	
 	public MenuView() {
 		GridPane pane = new GridPane();
@@ -54,17 +56,27 @@ public class MenuView extends View {
 		 * the Image needs to be wrapped in an ImageView object as the Graphic
 		 * of the Label.
 		 */
-		Image logo = new Image("./resources/logo.png");
+		Image logo = new Image(Main.logoPath);
 		logoLabel = new Label("", new ImageView(logo));
 		
 		//To add a node to the GridPane, use one of pane's add() methods:
 		//In this case, we use add(Node child, column, row, columnspan, rowspan)
 		//The two spans define how many columns or rows the child fills.
 		pane.add(logoLabel, 1, 1, 3, 3);
-		pane.add(buttons.getImportButton(), 2, 4, 1, 1);
-		pane.add(buttons.getGRButton(), 2, 6, 1, 1);
-		pane.add(buttons.getADButton(), 2, 8, 1, 1);
-		pane.add(buttons.getMAButton(), 2, 10, 1, 1);
+		/*
+		 * Use VBox to arrange the buttons with custom spacing inside GridPane:
+		 * custom spacing is declared as an instance variable BUTTON_SPACING.
+		 * 
+		 * Buttons are arranged in the center column (2); if more buttons are added,
+		 * create another wrapper GridPane with 2 columns of buttons, spanning 
+		 * 3 columns of the outer pane. 
+		 */ 
+		VBox buttonWrapperBox = new VBox(BUTTON_SPACING);
+		buttonWrapperBox.getChildren().add(buttons.getImportButton());
+		buttonWrapperBox.getChildren().add(buttons.getGRButton());
+		buttonWrapperBox.getChildren().add(buttons.getADButton());
+		buttonWrapperBox.getChildren().add(buttons.getMAButton());
+		pane.add(buttonWrapperBox, 2, 5, 1, 4);
 		
 		//getChildren() gets a list of the objects this pane contains (visually)
 		//Because the GridPane object pane contains all our desired nodes, we add
