@@ -23,6 +23,9 @@ public class MenuView extends View {
 	private final int HEIGHT = 480;
 	private final int BUTTON_SPACING = 15;
 	
+	/**
+	 * This constructor displays logo and menu buttons in a vertical list.
+	 */
 	public MenuView() {
 		GridPane pane = new GridPane();
 		pane.setId("gridpane-1");

@@ -8,11 +8,17 @@ import javafx.scene.control.Button;
  * @author David Luong, Yvonne Hoang, Carl Shefcik, Hung Tang
  * @version 1.0
  */
+/**
+ * @author vonnehoang
+ *
+ */
 public class ViewAccessors {
 	//all the buttons
 	private Button importButton, generateReportsButton, accessDataButton, manageAccountsButton;
 	
-	//instantiates all the buttons to be used on the main menu and navigation menus
+	/**
+	 * Instantiates all the buttons to be used on the main menu and navigation menus.
+	 */
 	public ViewAccessors() {
 		importButton = new Button("Import Data");
 		importButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -31,20 +37,34 @@ public class ViewAccessors {
 		manageAccountsButton.setId("btn-1");
 	}
 	
-	//simple get methods that all return buttons
-	
+	/**
+	 * Gets the import button.
+	 * @return importButton
+	 */
 	public Button getImportButton() {
 		return importButton;
 	}
 	
+	/**
+	 * Gets the Generate Reports button.
+	 * @return generateReportsButton
+	 */
 	public Button getGRButton() {
 		return generateReportsButton;
 	}
 	
+	/**
+	 * Gets the Access Data button.
+	 * @return accessDataButton
+	 */
 	public Button getADButton() {
 		return accessDataButton;
 	}
 	
+	/**
+	 * Gets the Manage Accounts button.
+	 * @return manageAccountsButton
+	 */
 	public Button getMAButton() {
 		return manageAccountsButton;
 	}
