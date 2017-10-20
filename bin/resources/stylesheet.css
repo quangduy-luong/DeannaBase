@@ -26,3 +26,7 @@
     -fx-fill: white;
     -fx-effect: dropshadow( gaussian , #a3a3a3 , 0,0,0,2 );
 }
+
+#gridpane-1 {
+    -fx-background-color: #FFFFFF;
+}

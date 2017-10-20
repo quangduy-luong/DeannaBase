@@ -59,6 +59,7 @@ public class IntroView extends View {
 	 */
 	public IntroView() {
 		GridPane pane = new GridPane();
+		pane.setId("gridpane-1");
 		//Set to true for debugging; setGridLinesVisible is default false.
 		//Remove line for finished product.
 		//pane.setGridLinesVisible(true);

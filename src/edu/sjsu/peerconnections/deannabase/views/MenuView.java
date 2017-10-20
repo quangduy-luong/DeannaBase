@@ -25,6 +25,7 @@ public class MenuView extends View {
 	
 	public MenuView() {
 		GridPane pane = new GridPane();
+		pane.setId("gridpane-1");
 		ViewAccessors buttons  = new ViewAccessors();
 		int rows = 12;
 		int columns = 5;
