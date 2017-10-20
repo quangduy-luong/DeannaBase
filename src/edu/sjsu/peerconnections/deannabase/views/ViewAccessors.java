@@ -9,8 +9,9 @@ import javafx.scene.control.Button;
  * @version 1.0
  */
 /**
- * @author vonnehoang
- *
+ * @author David Luong, Yvonne Hoang, Carl Shefcik, Hung Tang
+ * @version 1.0
+ * 
  */
 public class ViewAccessors {
 	//all the buttons
