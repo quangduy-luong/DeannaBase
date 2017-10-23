@@ -29,7 +29,6 @@ public class MenuView extends View {
 	public MenuView() {
 		GridPane pane = new GridPane();
 		pane.setId("gridpane-1");
-		ViewAccessors buttons  = new ViewAccessors();
 		int rows = 12;
 		int columns = 5;
 		
@@ -76,10 +75,10 @@ public class MenuView extends View {
 		 * 3 columns of the outer pane. 
 		 */ 
 		VBox buttonWrapperBox = new VBox(BUTTON_SPACING);
-		buttonWrapperBox.getChildren().add(buttons.getImportButton());
-		buttonWrapperBox.getChildren().add(buttons.getGRButton());
-		buttonWrapperBox.getChildren().add(buttons.getADButton());
-		buttonWrapperBox.getChildren().add(buttons.getMAButton());
+		buttonWrapperBox.getChildren().add(ViewAccessors.getImportButton());
+		buttonWrapperBox.getChildren().add(ViewAccessors.getGRButton());
+		buttonWrapperBox.getChildren().add(ViewAccessors.getADButton());
+		buttonWrapperBox.getChildren().add(ViewAccessors.getMAButton());
 		pane.add(buttonWrapperBox, 2, 5, 1, 4);
 		
 		//getChildren() gets a list of the objects this pane contains (visually)

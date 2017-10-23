@@ -2,6 +2,7 @@ package edu.sjsu.peerconnections.deannabase;
 
 import edu.sjsu.peerconnections.deannabase.views.IntroView;
 import edu.sjsu.peerconnections.deannabase.views.View;
+import edu.sjsu.peerconnections.deannabase.views.ViewAccessors;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -35,6 +36,8 @@ public class Main extends Application {
 	 */
 	@Override
 	public void start(Stage primaryStage) {
+		//initializes all buttons
+		ViewAccessors.initializeButtons();
 		//creates a new View object via factory method (newView())
 		View introView = View.newView(new IntroView());
 		//disables User's ability to resize window of login screen

@@ -15,12 +15,17 @@ import javafx.scene.control.Button;
  */
 public class ViewAccessors {
 	//all the buttons
-	private Button importButton, generateReportsButton, accessDataButton, manageAccountsButton;
+	private static Button loginButton, importButton, generateReportsButton, accessDataButton, 
+				manageAccountsButton;
 	
 	/**
 	 * Instantiates all the buttons to be used on the main menu and navigation menus.
 	 */
-	public ViewAccessors() {
+	public static void initializeButtons() {
+		loginButton = new Button("Log In");
+		loginButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		loginButton.setId("btn-1");
+		
 		importButton = new Button("Import Data");
 		importButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		importButton.setId("btn-1");
@@ -29,7 +34,7 @@ public class ViewAccessors {
 		generateReportsButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		generateReportsButton.setId("btn-1");
 		
-		accessDataButton = new Button("View All Data");
+		accessDataButton = new Button("Manage Data");
 		accessDataButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		accessDataButton.setId("btn-1");
 		
@@ -42,7 +47,7 @@ public class ViewAccessors {
 	 * Gets the import button.
 	 * @return importButton
 	 */
-	public Button getImportButton() {
+	public static Button getImportButton() {
 		return importButton;
 	}
 	
@@ -50,7 +55,7 @@ public class ViewAccessors {
 	 * Gets the Generate Reports button.
 	 * @return generateReportsButton
 	 */
-	public Button getGRButton() {
+	public static Button getGRButton() {
 		return generateReportsButton;
 	}
 	
@@ -58,7 +63,7 @@ public class ViewAccessors {
 	 * Gets the Access Data button.
 	 * @return accessDataButton
 	 */
-	public Button getADButton() {
+	public static Button getADButton() {
 		return accessDataButton;
 	}
 	
@@ -66,8 +71,16 @@ public class ViewAccessors {
 	 * Gets the Manage Accounts button.
 	 * @return manageAccountsButton
 	 */
-	public Button getMAButton() {
+	public static Button getMAButton() {
 		return manageAccountsButton;
+	}
+	
+	/**
+	 * Gets the Login button.
+	 * @return loginButton
+	 */
+	public static Button getLoginButton() {
+		return loginButton;
 	}
 	
 }

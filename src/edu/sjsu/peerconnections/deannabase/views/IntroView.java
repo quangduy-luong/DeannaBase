@@ -48,8 +48,7 @@ public class IntroView extends View {
 	 * or Staff. On unsuccessful log in, an error message will be displayed for
 	 * wrong username/password.
 	 */
-	private Button loginButton;
-
+	
 	/**
 	 * This constructor initializes logoLabel, forgotPasswordLabel, usernameTextField,
 	 * passwordTextField, and loginButton, organizing them in a GridPane object.
@@ -123,12 +122,9 @@ public class IntroView extends View {
 		passwordTextField = new PasswordField();
 		passwordTextField.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		passwordTextField.setPromptText("Password");
-		loginButton = new Button("Log In");
-		loginButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
-		//setId() is used to name the object for CSS purposes
-		loginButton.setId("btn-1");
-		loginButton.setOnAction( e -> {
-			newView(new MenuView());
+		//set action of the login button to close the stage and open MenuView
+		ViewAccessors.getLoginButton().setOnAction(e -> {
+			View.newView(new MenuView());
 			closeView();
 		});
 		//To add a node to the GridPane, use one of pane's add() methods:
@@ -136,7 +132,7 @@ public class IntroView extends View {
 		//The two spans define how many columns or rows the child fills.
 		pane.add(usernameTextField, 1, 5, 3, 1);
 		pane.add(passwordTextField, 1, 6, 3, 1);
-		pane.add(loginButton, 1, 8, 3, 1);
+		pane.add(ViewAccessors.getLoginButton(), 1, 8, 3, 1);
 		pane.add(logoLabel, 1, 1, 3, 3);
 		//To center forgotPasswordLabel requires an additional wrapper to set alignment
 		//use HBox to wrap forgotPasswordLabel
