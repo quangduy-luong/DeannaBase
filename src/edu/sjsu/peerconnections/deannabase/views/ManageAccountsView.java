@@ -11,21 +11,18 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 
 /**
- * MenuView is a view of the main menu that is shown right after the user logs in
+ * Manage accouns view is a page to manage accounts after the main menu
  * 
  * @author David Luong, Yvonne Hoang, Carl Shefcik, Hung Tang
  * @version 1.0
  */
-public class MenuView extends View {
+public class ManageAccountsView extends View{
 	private Labeled logoLabel;
 	private final int WIDTH = 800;
 	private final int HEIGHT = 480;
 	private final int BUTTON_SPACING = 15;
 	
-	/**
-	 * This constructor displays logo and menu buttons in a vertical list.
-	 */
-	public MenuView() {
+	public ManageAccountsView() {
 		GridPane pane = new GridPane();
 		pane.setId("gridpane-1");
 		int rows = 12;
@@ -53,6 +50,7 @@ public class MenuView extends View {
 		 * preferred size, defined previously as instance variables.
 		 */
 		pane.setPrefSize(WIDTH, HEIGHT);
+		
 		/*
 		 * Image objects require file paths. To wrap in a Label object,
 		 * the Image needs to be wrapped in an ImageView object as the Graphic
@@ -61,16 +59,17 @@ public class MenuView extends View {
 		Image logo = new Image(Main.logoPath);
 		logoLabel = new Label("", new ImageView(logo));
 		
-		//set action of the Manage acct button to close the stage and open manage acct
-		ViewAccessors.getMAButton().setOnAction(e -> {
-			View.newView(new ManageAccountsView());
-			closeView();
-		});
-		
 		//To add a node to the GridPane, use one of pane's add() methods:
 		//In this case, we use add(Node child, column, row, columnspan, rowspan)
 		//The two spans define how many columns or rows the child fills.
 		pane.add(logoLabel, 1, 1, 3, 3);
+		
+		//set action of the menu button to close the stage and open MenuView
+		ViewAccessors.getMenuButton().setOnAction(e -> {
+			View.newView(new MenuView());
+			closeView();
+		});
+		
 		/*
 		 * Use VBox to arrange the buttons with custom spacing inside GridPane:
 		 * custom spacing is declared as an instance variable BUTTON_SPACING.
@@ -80,10 +79,7 @@ public class MenuView extends View {
 		 * 3 columns of the outer pane. 
 		 */ 
 		VBox buttonWrapperBox = new VBox(BUTTON_SPACING);
-		buttonWrapperBox.getChildren().add(ViewAccessors.getImportButton());
-		buttonWrapperBox.getChildren().add(ViewAccessors.getGRButton());
-		buttonWrapperBox.getChildren().add(ViewAccessors.getADButton());
-		buttonWrapperBox.getChildren().add(ViewAccessors.getMAButton());
+		buttonWrapperBox.getChildren().add(ViewAccessors.getMenuButton());
 		pane.add(buttonWrapperBox, 2, 5, 1, 4);
 		
 		//getChildren() gets a list of the objects this pane contains (visually)
@@ -91,6 +87,7 @@ public class MenuView extends View {
 		//only pane to the children.
 		this.getChildren().add(pane);
 		
+		
 	}
-
+	
 }

@@ -16,7 +16,7 @@ import javafx.scene.control.Button;
 public class ViewAccessors {
 	//all the buttons
 	private static Button loginButton, importButton, generateReportsButton, accessDataButton, 
-				manageAccountsButton;
+				manageAccountsButton, menuButton;
 	
 	/**
 	 * Instantiates all the buttons to be used on the main menu and navigation menus.
@@ -25,6 +25,10 @@ public class ViewAccessors {
 		loginButton = new Button("Log In");
 		loginButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		loginButton.setId("btn-1");
+		
+		menuButton = new Button("Menu");
+		menuButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		menuButton.setId("btn-1");
 		
 		importButton = new Button("Import Data");
 		importButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -81,6 +85,14 @@ public class ViewAccessors {
 	 */
 	public static Button getLoginButton() {
 		return loginButton;
+	}
+	
+	/**
+	 * Gets the menu button
+	 * @return menuButton
+	 */
+	public static Button getMenuButton() {
+		return menuButton;
 	}
 	
 }
