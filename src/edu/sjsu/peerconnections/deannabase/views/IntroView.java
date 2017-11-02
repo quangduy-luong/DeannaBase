@@ -1,9 +1,10 @@
 package edu.sjsu.peerconnections.deannabase.views;
 
 import edu.sjsu.peerconnections.deannabase.Main;
+import edu.sjsu.peerconnections.deannabase.controllers.Authentication;
+import edu.sjsu.peerconnections.deannabase.message.Message;
 import javafx.application.Platform;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
@@ -122,10 +123,16 @@ public class IntroView extends View {
 		passwordTextField = new PasswordField();
 		passwordTextField.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		passwordTextField.setPromptText("Password");
-		//set action of the login button to close the stage and open MenuView
+		//set action of login button
+		//accesses MenuView if authorized, shows error message if not
 		ViewAccessors.getLoginButton().setOnAction(e -> {
-			View.newView(new MenuView());
-			closeView();
+			if(authorizeUser(usernameTextField.getText(), passwordTextField.getText())) {
+				View.newView(new MenuView());
+				closeView();
+			}
+			else {
+				Message.getInstance("Username or password not found!", "error").show();
+			}
 		});
 		//To add a node to the GridPane, use one of pane's add() methods:
 		//In this case, we use add(Node child, column, row, columnspan, rowspan)
@@ -160,6 +167,16 @@ public class IntroView extends View {
 	 */
 	public void initFocus() {
 		initFocus(logoLabel);
+	}
+	
+	/**
+	 * Authorizes the user with a username and password
+	 * @param username
+	 * @param password
+	 * @return true if user is found
+	 */
+	public boolean authorizeUser(String username, String password) {
+		return Authentication.authenticate(username, password);
 	}
 
 }
