@@ -90,7 +90,8 @@ public class MenuView extends View {
 		//Because the GridPane object pane contains all our desired nodes, we add
 		//only pane to the children.
 		this.getChildren().add(pane);
-		
+		pane.prefHeightProperty().bind(this.heightProperty());
+		pane.prefWidthProperty().bind(this.widthProperty());
 	}
 
 }

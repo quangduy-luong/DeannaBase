@@ -88,6 +88,8 @@ public abstract class View extends Pane {
 		view.setStylesheet(Main.stylesheetPath);
 		view.setTitle(Main.title);
 		view.setIcon(Main.iconPath);
+		s.setMinHeight(480);
+		s.setMinWidth(800);
 		s.show();
 		return view;
 	}

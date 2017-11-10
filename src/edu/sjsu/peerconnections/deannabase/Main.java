@@ -41,6 +41,6 @@ public class Main extends Application {
 		//creates a new View object via factory method (newView())
 		View introView = View.newView(new IntroView());
 		//disables User's ability to resize window of login screen
-		introView.getStage().setResizable(false);
+		//introView.getStage().setResizable(false);
 	}
 }

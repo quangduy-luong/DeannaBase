@@ -4,6 +4,8 @@ import edu.sjsu.peerconnections.deannabase.Main;
 import edu.sjsu.peerconnections.deannabase.controllers.Authentication;
 import edu.sjsu.peerconnections.deannabase.message.Message;
 import javafx.application.Platform;
+import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Label;
@@ -12,10 +14,14 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.VBox;
 
 /**
  * IntroView is a View displayed in the initial window/Stage where
@@ -62,7 +68,7 @@ public class IntroView extends View {
 		pane.setId("gridpane-1");
 		//Set to true for debugging; setGridLinesVisible is default false.
 		//Remove line for finished product.
-		//pane.setGridLinesVisible(true);
+		pane.setGridLinesVisible(true);
 
 		int rows = 12;
 		int columns = 5;
@@ -108,8 +114,13 @@ public class IntroView extends View {
 		 * the Image needs to be wrapped in an ImageView object as the Graphic
 		 * of the Label.
 		 */
-		Image logo = new Image(Main.logoPath);
-		logoLabel = new Label("", new ImageView(logo));
+
+		ImageView logo = new ImageView(new Image(Main.logoPath));
+		logoLabel = new Label("", logo);
+		VBox logoBoxWrapper = new VBox();
+		logoBoxWrapper.getChildren().add(logoLabel);
+		//VBox.setVgrow(logoLabel, Priority.ALWAYS);
+		logo.fitWidthProperty().bind((pane.widthProperty().getValue()*0.6)); 
 		//Hyperlink is a Label that makes the text clickable.
 		forgotPasswordLabel = new Hyperlink("Forgot password?");
 		//forgotPasswordLabel is currently not clickable
@@ -134,13 +145,23 @@ public class IntroView extends View {
 				Message.getInstance("Username or password not found!", "error").show();
 			}
 		});
+		this.setOnKeyPressed(new EventHandler<KeyEvent>()
+				{
+					@Override
+					public void handle(KeyEvent event) 
+					{
+						if(event.getCode() == KeyCode.ENTER)
+							ViewAccessors.getLoginButton().fire();
+					}
+			
+				});
 		//To add a node to the GridPane, use one of pane's add() methods:
 		//In this case, we use add(Node child, column, row, columnspan, rowspan)
 		//The two spans define how many columns or rows the child fills.
 		pane.add(usernameTextField, 1, 5, 3, 1);
 		pane.add(passwordTextField, 1, 6, 3, 1);
 		pane.add(ViewAccessors.getLoginButton(), 1, 8, 3, 1);
-		pane.add(logoLabel, 1, 1, 3, 3);
+		pane.add(logoBoxWrapper, 1, 1, 3, 3);
 		//To center forgotPasswordLabel requires an additional wrapper to set alignment
 		//use HBox to wrap forgotPasswordLabel
 		HBox forgotPasswordLabelWrapper = new HBox();
@@ -154,6 +175,10 @@ public class IntroView extends View {
 		this.getChildren().add(pane);
 		//changes the focus of the intro screen so that no textfields are automatically
 		//selected (user must click on Username box)
+		
+		pane.prefHeightProperty().bind(this.heightProperty());
+		pane.prefWidthProperty().bind(this.widthProperty());
+		
 		Platform.runLater( () -> {
 			((IntroView)getStage().getScene().getRoot()).initFocus();
 		});

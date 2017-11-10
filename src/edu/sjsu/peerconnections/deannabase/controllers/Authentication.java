@@ -24,6 +24,7 @@ public class Authentication {
 	 * @return true if authentication is successful
 	 */
 	public static boolean authenticate(String username, String password) {
+		//something that does the hash for you
 		MessageDigest hasher;
 		try {
 			hasher = MessageDigest.getInstance("SHA-256");
