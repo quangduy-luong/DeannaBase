@@ -118,9 +118,9 @@ public class IntroView extends View {
 		ImageView logo = new ImageView(new Image(Main.logoPath));
 		logoLabel = new Label("", logo);
 		VBox logoBoxWrapper = new VBox();
+		logoBoxWrapper.setAlignment(Pos.CENTER);
 		logoBoxWrapper.getChildren().add(logoLabel);
 		//VBox.setVgrow(logoLabel, Priority.ALWAYS);
-		logo.fitWidthProperty().bind((pane.widthProperty().getValue()*0.6)); 
 		//Hyperlink is a Label that makes the text clickable.
 		forgotPasswordLabel = new Hyperlink("Forgot password?");
 		//forgotPasswordLabel is currently not clickable
