@@ -4,7 +4,10 @@ import edu.sjsu.peerconnections.deannabase.Main;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 /**
@@ -17,6 +20,52 @@ public abstract class View extends Pane {
 	
 	//stage that holds the View
 	private Stage stage;
+	
+	//variable gridpane
+	protected GridPane grid;
+	
+	/**
+	 * Generates a new view with specified rows and columns
+	 * @param rows
+	 * @param columns
+	 */
+	public View(int rows, int columns) {
+		grid = new GridPane();
+		grid.setId("gridpane-1");
+		//Set to true for debugging; setGridLinesVisible is default false.
+		//Remove line for finished product.
+		grid.setGridLinesVisible(true);
+		//for loops create the number of columns and rows previously specified.
+		for (int i = 0; i < columns; i++) {
+			//ColumnConstraints - literally, a column object/node for GridPane to use
+			ColumnConstraints colConst = new ColumnConstraints();
+			//all columns are same size (divided equally across the pane)
+			colConst.setPercentWidth(100.0 / columns);
+			//getColumnConstraints() gets the GridPane object's list of ColumnConstraints, 
+			//to which we add a new column node/child to.
+			grid.getColumnConstraints().add(colConst);
+		}
+		for (int i = 0; i < rows; i++) {
+			//RowConstraints - literally, a row object/node for GridPane to use
+			RowConstraints rowConst = new RowConstraints();
+			//all rows are same size (divided equally across the pane)
+			rowConst.setPercentHeight(100.0 / rows);
+			grid.getRowConstraints().add(rowConst);         
+		}
+		this.getChildren().add(grid);
+	}
+	
+	/**
+	 * Adds a child node to the grid at specified position and span
+	 * @param node
+	 * @param col
+	 * @param row
+	 * @param colSpan
+	 * @param rowSpan
+	 */
+	public void add(Node node, int col, int row, int colSpan, int rowSpan) {
+		grid.add(node, col, row, colSpan, rowSpan);
+	}
 	
 	/**
 	 * Sets the Stage.

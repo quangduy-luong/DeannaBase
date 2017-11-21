@@ -1,27 +1,17 @@
 package edu.sjsu.peerconnections.deannabase.views;
 
-import edu.sjsu.peerconnections.deannabase.Main;
 import edu.sjsu.peerconnections.deannabase.controllers.Authentication;
 import edu.sjsu.peerconnections.deannabase.message.Message;
 import javafx.application.Platform;
-import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Hyperlink;
-import javafx.scene.control.Label;
 import javafx.scene.control.Labeled;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.RowConstraints;
-import javafx.scene.layout.VBox;
 
 /**
  * IntroView is a View displayed in the initial window/Stage where
@@ -33,15 +23,12 @@ import javafx.scene.layout.VBox;
  */
 public class IntroView extends View {
 
-	//instance variables
-	private final int WIDTH = 800;
-	private final int HEIGHT = 480;
 	/*
 	 * Labels can contain text or images. In this case, logoLabel will contain an
 	 * image of the Peer Connections logo, and forgotPasswordLabel will contain
 	 * text reading "Forgot Password?"
 	 */
-	private Labeled logoLabel, forgotPasswordLabel;
+	private Labeled forgotPasswordLabel;
 	/*
 	 * TextFields are where User will input information. usernameTextField is for
 	 * username, and passwordTextField is for their password. passwordTextField is
@@ -64,63 +51,8 @@ public class IntroView extends View {
 	 * followed by a log in button, and then a clickable forgot password label.
 	 */
 	public IntroView() {
-		GridPane pane = new GridPane();
-		pane.setId("gridpane-1");
-		//Set to true for debugging; setGridLinesVisible is default false.
-		//Remove line for finished product.
-		pane.setGridLinesVisible(true);
-
-		int rows = 12;
-		int columns = 5;
-		/*
-		 * Design of grid, from top to bottom:
-		 * 1 row of spacing
-		 * 3 rows for logo
-		 * 1 row of spacing
-		 * 2 rows for username & password
-		 * 1 row for spacing
-		 * 1 row for log in button
-		 * 1 row for forgot password label
-		 * 2 rows of spacing
-		 * 
-		 * 1 column of spacing on each side
-		 */
-		//for loops create the number of columns and rows previously specified.
-		for (int i = 0; i < columns; i++) {
-			//ColumnConstraints - literally, a column object/node for GridPane to use
-			ColumnConstraints colConst = new ColumnConstraints();
-			//all columns are same size (divided equally across the pane)
-			colConst.setPercentWidth(100.0 / columns);
-			//getColumnConstraints() gets the GridPane object's list of ColumnConstraints, 
-			//to which we add a new column node/child to.
-			pane.getColumnConstraints().add(colConst);
-		}
-		for (int i = 0; i < rows; i++) {
-			//RowConstraints - literally, a row object/node for GridPane to use
-			RowConstraints rowConst = new RowConstraints();
-			//all rows are same size (divided equally across the pane)
-			rowConst.setPercentHeight(100.0 / rows);
-			pane.getRowConstraints().add(rowConst);         
-		}
-		/*
-		 * Scenes wrap around the panes they contain, so panes must define their
-		 * preferred size, defined previously as instance variables.
-		 */
-		pane.setPrefSize(WIDTH, HEIGHT);
-
+		super(12, 5);
 		//initialize instance variables
-		/*
-		 * Image objects require file paths. To wrap in a Label object,
-		 * the Image needs to be wrapped in an ImageView object as the Graphic
-		 * of the Label.
-		 */
-
-		ImageView logo = new ImageView(new Image(Main.logoPath));
-		logoLabel = new Label("", logo);
-		VBox logoBoxWrapper = new VBox();
-		logoBoxWrapper.setAlignment(Pos.CENTER);
-		logoBoxWrapper.getChildren().add(logoLabel);
-		//VBox.setVgrow(logoLabel, Priority.ALWAYS);
 		//Hyperlink is a Label that makes the text clickable.
 		forgotPasswordLabel = new Hyperlink("Forgot password?");
 		//forgotPasswordLabel is currently not clickable
@@ -155,29 +87,28 @@ public class IntroView extends View {
 					}
 			
 				});
-		//To add a node to the GridPane, use one of pane's add() methods:
+		//To add a node to the GridPane, use View's add() method:
 		//In this case, we use add(Node child, column, row, columnspan, rowspan)
 		//The two spans define how many columns or rows the child fills.
-		pane.add(usernameTextField, 1, 5, 3, 1);
-		pane.add(passwordTextField, 1, 6, 3, 1);
-		pane.add(ViewAccessors.getLoginButton(), 1, 8, 3, 1);
-		pane.add(logoBoxWrapper, 1, 1, 3, 3);
+		this.add(usernameTextField, 1, 5, 3, 1);
+		this.add(passwordTextField, 1, 6, 3, 1);
+		this.add(ViewAccessors.getLoginButton(), 1, 8, 3, 1);
+		this.add(ViewAccessors.getLogo(), 1, 1, 3, 3);
 		//To center forgotPasswordLabel requires an additional wrapper to set alignment
 		//use HBox to wrap forgotPasswordLabel
 		HBox forgotPasswordLabelWrapper = new HBox();
 		forgotPasswordLabelWrapper.getChildren().add(forgotPasswordLabel);
 		//set alignment of forgotPasswordLabelWrapper to centered, then add to pane
 		forgotPasswordLabelWrapper.setAlignment(Pos.CENTER);
-		pane.add(forgotPasswordLabelWrapper, 2, 9, 1, 1);
+		this.add(forgotPasswordLabelWrapper, 2, 9, 1, 1);
 		//getChildren() gets a list of the objects this pane contains (visually)
 		//Because the GridPane object pane contains all our desired nodes, we add
 		//only pane to the children.
-		this.getChildren().add(pane);
 		//changes the focus of the intro screen so that no textfields are automatically
 		//selected (user must click on Username box)
 		
-		pane.prefHeightProperty().bind(this.heightProperty());
-		pane.prefWidthProperty().bind(this.widthProperty());
+		grid.prefHeightProperty().bind(this.heightProperty());
+		grid.prefWidthProperty().bind(this.widthProperty());
 		
 		Platform.runLater( () -> {
 			((IntroView)getStage().getScene().getRoot()).initFocus();
@@ -191,7 +122,7 @@ public class IntroView extends View {
 	 * Stage is already visible.
 	 */
 	public void initFocus() {
-		initFocus(logoLabel);
+		initFocus(ViewAccessors.getLogo());
 	}
 	
 	/**

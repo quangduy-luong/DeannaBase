@@ -37,9 +37,9 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		//initializes all buttons
-		ViewAccessors.initializeButtons();
+		ViewAccessors.initialize();
 		//creates a new View object via factory method (newView())
-		View introView = View.newView(new IntroView());
+		View.newView(new IntroView());
 		//disables User's ability to resize window of login screen
 		//introView.getStage().setResizable(false);
 	}

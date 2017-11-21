@@ -1,6 +1,12 @@
 package edu.sjsu.peerconnections.deannabase.views;
 
+import edu.sjsu.peerconnections.deannabase.Main;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 
 /**
  * ViewAccessors is a class that has all the buttons used to view all of the main views
@@ -17,11 +23,12 @@ public class ViewAccessors {
 	//all the buttons
 	private static Button loginButton, importButton, generateReportsButton, accessDataButton, 
 				manageAccountsButton, menuButton;
+	private static VBox logoBox;
 	
 	/**
 	 * Instantiates all the buttons to be used on the main menu and navigation menus.
 	 */
-	public static void initializeButtons() {
+	public static void initialize() {
 		loginButton = new Button("Log In");
 		loginButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		loginButton.setId("btn-1");
@@ -45,6 +52,12 @@ public class ViewAccessors {
 		manageAccountsButton = new Button("Manage Accounts");
 		manageAccountsButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		manageAccountsButton.setId("btn-1");
+		
+		logoBox = new VBox();
+		Label logoLabel = new Label("", new ImageView(new Image(Main.logoPath)));
+		logoBox.setId("logo-1");
+		logoBox.setAlignment(Pos.CENTER);
+		logoBox.getChildren().add(logoLabel);
 	}
 	
 	/**
@@ -93,6 +106,10 @@ public class ViewAccessors {
 	 */
 	public static Button getMenuButton() {
 		return menuButton;
+	}
+	
+	public static VBox getLogo() {
+		return logoBox;
 	}
 	
 }
