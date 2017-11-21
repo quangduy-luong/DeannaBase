@@ -53,6 +53,9 @@ public abstract class View extends Pane {
 			grid.getRowConstraints().add(rowConst);         
 		}
 		this.getChildren().add(grid);
+		
+		grid.prefHeightProperty().bind(this.heightProperty());
+		grid.prefWidthProperty().bind(this.widthProperty());
 	}
 	
 	/**

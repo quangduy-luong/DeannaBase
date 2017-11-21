@@ -107,9 +107,6 @@ public class IntroView extends View {
 		//changes the focus of the intro screen so that no textfields are automatically
 		//selected (user must click on Username box)
 		
-		grid.prefHeightProperty().bind(this.heightProperty());
-		grid.prefWidthProperty().bind(this.widthProperty());
-		
 		Platform.runLater( () -> {
 			((IntroView)getStage().getScene().getRoot()).initFocus();
 		});

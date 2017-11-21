@@ -37,12 +37,6 @@ public class ManageAccountsView extends View{
 		buttonWrapperBox.getChildren().add(ViewAccessors.getADButton());
 		buttonWrapperBox.getChildren().add(ViewAccessors.getMAButton());
 		this.add(buttonWrapperBox, 2, 5, 1, 4);
-		
-		//getChildren() gets a list of the objects this pane contains (visually)
-		//Because the GridPane object pane contains all our desired nodes, we add
-		//only pane to the children.
-		grid.prefHeightProperty().bind(this.heightProperty());
-		grid.prefWidthProperty().bind(this.widthProperty());
 	}
 	
 }
