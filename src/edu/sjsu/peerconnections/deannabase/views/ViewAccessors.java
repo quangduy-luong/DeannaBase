@@ -22,7 +22,7 @@ import javafx.scene.layout.VBox;
 public class ViewAccessors {
 	//all the buttons
 	private static Button loginButton, importButton, generateReportsButton, accessDataButton, 
-				manageAccountsButton, menuButton;
+				manageAccountsButton, menuButton, logOutButton;
 	private static VBox logoBox;
 	
 	/**
@@ -32,6 +32,10 @@ public class ViewAccessors {
 		loginButton = new Button("Log In");
 		loginButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
 		loginButton.setId("btn-1");
+		
+		logOutButton = new Button("Log Out");
+		logOutButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
+		logOutButton.setId("btn-1");
 		
 		menuButton = new Button("Menu");
 		menuButton.setPrefSize(Double.MAX_VALUE, Double.MAX_VALUE);
@@ -108,6 +112,17 @@ public class ViewAccessors {
 		return menuButton;
 	}
 	
+	/**
+	 * Gets the logout button
+	 * @return logOutButton
+	 */
+	public static Button getLogOutButton() {
+		return logOutButton;
+	}
+	/**
+	 * Gets the Logo
+	 * @return logoBox
+	 */
 	public static VBox getLogo() {
 		return logoBox;
 	}

@@ -14,8 +14,13 @@ public class ManageAccountsView extends View{
 	public ManageAccountsView() {
 		super(12, 5);
 		//set action of the Manage acct button to close the stage and open manage acct
-		ViewAccessors.getMAButton().setOnAction(e -> {
+		ViewAccessors.getMenuButton().setOnAction(e -> {
 			View.newView(new MenuView());
+			closeView();
+		});
+		//set action of the logout button to close the stage and open intro view
+		ViewAccessors.getLogOutButton().setOnAction(e -> {
+			View.newView(new IntroView());
 			closeView();
 		});
 		
@@ -32,10 +37,8 @@ public class ManageAccountsView extends View{
 		 * 3 columns of the outer pane. 
 		 */ 
 		VBox buttonWrapperBox = new VBox(BUTTON_SPACING);
-		buttonWrapperBox.getChildren().add(ViewAccessors.getImportButton());
-		buttonWrapperBox.getChildren().add(ViewAccessors.getGRButton());
-		buttonWrapperBox.getChildren().add(ViewAccessors.getADButton());
-		buttonWrapperBox.getChildren().add(ViewAccessors.getMAButton());
+		buttonWrapperBox.getChildren().add(ViewAccessors.getMenuButton());
+		buttonWrapperBox.getChildren().add(ViewAccessors.getLogOutButton());
 		this.add(buttonWrapperBox, 2, 5, 1, 4);
 	}
 	

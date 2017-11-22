@@ -21,6 +21,11 @@ public class MenuView extends View {
 			View.newView(new ManageAccountsView());
 			closeView();
 		});
+		//set action of the logout button to close the stage and open intro view
+		ViewAccessors.getLogOutButton().setOnAction(e -> {
+			View.newView(new IntroView());
+			closeView();
+		});
 		
 		//To add a node to the GridPane, use one of pane's add() methods:
 		//In this case, we use add(Node child, column, row, columnspan, rowspan)
@@ -39,7 +44,9 @@ public class MenuView extends View {
 		buttonWrapperBox.getChildren().add(ViewAccessors.getGRButton());
 		buttonWrapperBox.getChildren().add(ViewAccessors.getADButton());
 		buttonWrapperBox.getChildren().add(ViewAccessors.getMAButton());
+		buttonWrapperBox.getChildren().add(ViewAccessors.getLogOutButton());
 		this.add(buttonWrapperBox, 2, 6, 1, 4);
 	}
-
+	
+	
 }
