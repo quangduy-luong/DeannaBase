@@ -16,12 +16,27 @@ public class MenuView extends View {
 	 */
 	public MenuView() {
 		super(12, 5);
-		//set action of the Manage acct button to close the stage and open manage acct
+		//set action of the Import Data button to close the stage and open ImportDataView
+		ViewAccessors.getImportButton().setOnAction(e -> {
+			View.newView(new ImportDataView());
+			closeView();
+		});
+		//set action of the Generate Reports button to close the stage and open GenerateReportsView
+		ViewAccessors.getGRButton().setOnAction(e -> {
+			View.newView(new GenerateReportsView());
+			closeView();
+		});
+		//set action of the Access Data button to close the stage and open AccessDataView
+		ViewAccessors.getADButton().setOnAction(e -> {
+			View.newView(new AccessDataView());
+			closeView();
+		});
+		//set action of the Manage Account button to close the stage and open ManageAccountdsView
 		ViewAccessors.getMAButton().setOnAction(e -> {
 			View.newView(new ManageAccountsView());
 			closeView();
 		});
-		//set action of the logout button to close the stage and open intro view
+		//set action of the logout button to close the stage and open IntroView
 		ViewAccessors.getLogOutButton().setOnAction(e -> {
 			View.newView(new IntroView());
 			closeView();

@@ -3,15 +3,15 @@ package edu.sjsu.peerconnections.deannabase.views;
 import javafx.scene.layout.VBox;
 
 /**
- * Manage accounts view is a page to manage accounts after the main menu
+ * Import data view is a page to manage accounts after the main menu
  * 
  * @author David Luong, Yvonne Hoang, Carl Shefcik, Hung Tang
  * @version 1.0
  */
-public class ManageAccountsView extends View{
-	private final int BUTTON_SPACING = 15;
+public class ImportDataView extends View{
+private final int BUTTON_SPACING = 15;
 	
-	public ManageAccountsView() {
+	public ImportDataView() {
 		super(12, 5);
 		//set action of the Menu button to close the stage and open manage acct
 		ViewAccessors.getMenuButton().setOnAction(e -> {
@@ -41,5 +41,5 @@ public class ManageAccountsView extends View{
 		buttonWrapperBox.getChildren().add(ViewAccessors.getLogOutButton());
 		this.add(buttonWrapperBox, 2, 5, 1, 4);
 	}
-	
+
 }
