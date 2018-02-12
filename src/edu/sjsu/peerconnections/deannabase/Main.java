@@ -1,5 +1,6 @@
 package edu.sjsu.peerconnections.deannabase;
 
+import edu.sjsu.peerconnections.deannabase.controllers.DBController;
 import edu.sjsu.peerconnections.deannabase.views.IntroView;
 import edu.sjsu.peerconnections.deannabase.views.View;
 import edu.sjsu.peerconnections.deannabase.views.ViewAccessors;
@@ -38,6 +39,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		//initializes all buttons
 		ViewAccessors.initialize();
+		//initializes controllers
+		DBController.init();
 		//creates a new View object via factory method (newView())
 		View.newView(new IntroView());
 		//disables User's ability to resize window of login screen

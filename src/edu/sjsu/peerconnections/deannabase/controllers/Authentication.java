@@ -2,8 +2,13 @@ package edu.sjsu.peerconnections.deannabase.controllers;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.util.HashMap;
-import java.util.Map;
+import java.security.SecureRandom;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Random;
+
+import edu.sjsu.peerconnections.models.UserModel;
 
 /**
  * Authentication controller. Responsible for authenticating users, hashing passwords
@@ -15,26 +20,48 @@ import java.util.Map;
 
 public class Authentication {
 	
+	private static UserModel currentUser;
+	
 	/**
 	 * Authenticates a user
-	 * 	First hashes the password using SHA-256 algorithm
+	 * 	First hashes the password using SHA-512 algorithm
 	 * 	Then it attempts to find a match in the database
 	 * @param username
 	 * @param password
 	 * @return true if authentication is successful
 	 */
 	public static boolean authenticate(String username, String password) {
-		//something that does the hash for you
+		// something that does the hash for you
 		MessageDigest hasher;
 		try {
-			hasher = MessageDigest.getInstance("SHA-256");
+			hasher = MessageDigest.getInstance("SHA-512");
 		} catch (NoSuchAlgorithmException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
 		}
-		String hashedPassword = byteArrayToString(hasher.digest(password.getBytes()));
-		return login(username, hashedPassword);
+		// sets up database connection to compare user password
+		UserModel user = new UserModel();
+		ArrayList<Object> params = new ArrayList<Object>();
+		params.add(username);
+		// attempts to find a user in the database with the provided username
+		ResultSet rs = DBController.executeQuery("SELECT * FROM Users WHERE Username = ?", params);
+		try {
+			if (rs.next()) {
+				user.load(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		hasher.update(password.getBytes());
+		hasher.update(user.getSalt().getBytes());
+		String hashedPassword = byteArrayToString(hasher.digest());
+		// user is authenticated only if the hashed password match
+		if (user.getPassword().equals(hashedPassword)) {
+			loginUser(user);
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -53,15 +80,65 @@ public class Authentication {
 	}
 	
 	/**
-	 * Attempts to locate a user in the database. Placeholder for now
-	 * @param username
-	 * @param hashedPassword
+	 * Generates a secure 64-bit random string 
+	 * @return randomized string
+	 */
+	private static String randomSalt() {
+		Random random = new SecureRandom();
+		byte[] salt = new byte[64];
+		random.nextBytes(salt);
+		return byteArrayToString(salt);
+	}
+	
+	/**
+	 * Logs the user in
+	 * @param user - user to be logined
+	 */
+	private static void loginUser(UserModel user) {
+		currentUser = user;
+	}
+	
+	/**
+	 * Logs the current user out
+	 */
+	public static void logoutUser() {
+		currentUser = null;
+	}
+	
+	/**
+	 * Current user getter
 	 * @return
 	 */
-	private static boolean login(String username, String hashedPassword) {
-		Map<String, String> users = new HashMap<String, String>();
-		users.put("user", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8");
-		return users.containsKey(username) && users.get(username).equals(hashedPassword);
+	public static UserModel getCurrentUser() {
+		return currentUser;
+	}
+	
+	/**
+	 * Creates a new User with the specified username and password
+	 * @param username
+	 * @param password
+	 * @return the new user model
+	 */
+	public static UserModel createUser(String username, String password) {
+		// snipped below deals with security measures
+		MessageDigest hasher;
+		try {
+			hasher = MessageDigest.getInstance("SHA-512");
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+			return null;
+		}
+		String salt = randomSalt();
+		hasher.update(password.getBytes());
+		hasher.update(salt.getBytes());
+		String hashedPassword = byteArrayToString(hasher.digest());
+		
+		// creates a new user model
+		UserModel model = new UserModel(username, hashedPassword, salt);
+		
+		// inserts the model into the database
+		model.create();
+		return model;
 	}
 
 }
