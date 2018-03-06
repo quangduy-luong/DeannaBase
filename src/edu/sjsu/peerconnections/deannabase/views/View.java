@@ -34,7 +34,7 @@ public abstract class View extends Pane {
 		grid.setId("gridpane-1");
 		//Set to true for debugging; setGridLinesVisible is default false.
 		//Remove line for finished product.
-		grid.setGridLinesVisible(true);
+//		grid.setGridLinesVisible(true);
 		//for loops create the number of columns and rows previously specified.
 		for (int i = 0; i < columns; i++) {
 			//ColumnConstraints - literally, a column object/node for GridPane to use

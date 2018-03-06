@@ -28,7 +28,7 @@ public class MenuView extends View {
 		});
 		//set action of the Access Data button to close the stage and open AccessDataView
 		ViewAccessors.getADButton().setOnAction(e -> {
-			View.newView(new AccessDataView());
+			View.newView(new FormView());
 			closeView();
 		});
 		//set action of the Manage Account button to close the stage and open ManageAccountdsView

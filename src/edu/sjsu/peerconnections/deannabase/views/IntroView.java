@@ -43,6 +43,9 @@ public class IntroView extends View {
 	 * wrong username/password.
 	 */
 	
+	private final int height = 480;
+	private final int width = 800;
+	
 	/**
 	 * This constructor initializes logoLabel, forgotPasswordLabel, usernameTextField,
 	 * passwordTextField, and loginButton, organizing them in a GridPane object.
@@ -96,11 +99,11 @@ public class IntroView extends View {
 		this.add(ViewAccessors.getLogo(), 1, 1, 3, 3);
 		//To center forgotPasswordLabel requires an additional wrapper to set alignment
 		//use HBox to wrap forgotPasswordLabel
-		HBox forgotPasswordLabelWrapper = new HBox();
-		forgotPasswordLabelWrapper.getChildren().add(forgotPasswordLabel);
+		HBox forgotPasswordLabelWrapperBox = new HBox();
+		forgotPasswordLabelWrapperBox.getChildren().add(forgotPasswordLabel);
 		//set alignment of forgotPasswordLabelWrapper to centered, then add to pane
-		forgotPasswordLabelWrapper.setAlignment(Pos.CENTER);
-		this.add(forgotPasswordLabelWrapper, 2, 9, 1, 1);
+		forgotPasswordLabelWrapperBox.setAlignment(Pos.CENTER);
+		this.add(forgotPasswordLabelWrapperBox, 2, 9, 1, 1);
 		//getChildren() gets a list of the objects this pane contains (visually)
 		//Because the GridPane object pane contains all our desired nodes, we add
 		//only pane to the children.
@@ -131,5 +134,4 @@ public class IntroView extends View {
 	public boolean authorizeUser(String username, String password) {
 		return Authentication.authenticate(username, password);
 	}
-
 }
